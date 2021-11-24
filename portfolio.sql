@@ -13,6 +13,7 @@ create table novcanik(
     sifra int not null primary key auto_increment,
     naziv varchar(50),
     korisnik int not null,
+    kriptovaluta int not null,
     vrijednost varchar(50)
 );
 
@@ -20,15 +21,14 @@ create table kriptovaluta(
     sifra int not null primary key auto_increment,
     naziv varchar(50),
     oznaka varchar(50),
-    marketcap decimal(18.2),
-    transakcija int not null,
-    novcanik int not null
+    transakcija int not null
 );
 
 create table transakcija(
     sifra int not null primary key auto_increment,
     exchange int not null,
-    vrijednost decimal(18.2),
+    kupnja decimal(18.2),
+    prodaja decimal(18.2),
     oznakakriptovalute varchar(50)
 );
 
@@ -40,5 +40,25 @@ create table exchange(
 
 alter table novcanik add foreign key (korisnik) references korisnik(sifra);
 alter table kriptovaluta add foreign key (transakcija) references transakcija(sifra);
-alter table kriptovaluta add foreign key (novcanik) references novcanik(sifra);
+alter table novcanik add foreign key (kriptovaluta) references kriptovaluta(sifra);
 alter table transakcija add foreign key (exchange) references exchange(sifra);
+
+insert into korisnik(sifra,ime,prezime,email)values
+(null,'Ivan','Morgić','ivanmorgic@email.com'),
+(null,'Marin','Spasojević','mspasojevic@gmail.com'),
+(null,'Luka','Malinić','malina123@gmail.com');
+
+insert into exchange(sifra,naziv,certificiran)values
+(null,'KuCoin',true),
+(null,'Binance',true),
+(null,'Hotbit',false);
+
+insert into transakcija(sifra,exchange,kupnja,prodaja,oznakakriptovalute)values
+(null,1,10040.13,0,'BTC'),
+(null,3,45666.25,0,'ETH'),
+(null,2,0,21342.12,'BNB');
+
+insert into kriptovaluta(sifra,naziv,oznaka,transakcija)values
+(null,'Bitcoin','BTC',1),
+(null,'Ethereum','ETH',2),
+(null,'Binance coin','BNB',3);
