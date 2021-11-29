@@ -29,6 +29,8 @@ create table transakcija(
     kupnja decimal(18,8),
     prodaja decimal(18,8),
     datumtransakcije datetime not null,
+    cijenakupnje decimal(18,2),
+    cijenaprodaje decimal(18,2),
     kriptovaluta int not null
 );
 
@@ -58,7 +60,7 @@ insert into kriptovaluta(sifra,naziv,oznaka)values
 (null,'Ethereum','ETH'),
 (null,'Binance coin','BNB');
 
-insert into transakcija(sifra,exchange,kupnja,prodaja,datumtransakcije,kriptovaluta)values
-(null,1,'1','0',01-19-2021,2),
-(null,2,'0','3',09-12-2021,1),
-(null,3,'10','0',10-13-2021,3);
+insert into transakcija(sifra,exchange,kupnja,prodaja,datumtransakcije,cijenakupnje,cijenaprodaje,kriptovaluta)values
+(null,1,'1','0',01-19-2021,3452.12,0,2),
+(null,2,'0','3',09-12-2021,0,43567.21,1),
+(null,3,'10','0',10-13-2021,356.12,0,3);
